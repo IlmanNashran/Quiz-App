@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Quiz APP',
       theme: ThemeData(
         fontFamily: 'ArchitectsDaughter',
+        scaffoldBackgroundColor: const Color.fromRGBO(31, 31, 31, 1.0),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
