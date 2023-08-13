@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:quiz_app/pages/game_page_provider.dart';
 
 class GamePage extends StatelessWidget {
   double? _deviceHeight, _deviceWidth;
+
+  GamePageProvider? _gamePageProvider;
 
   @override
   Widget build(BuildContext context) {
     _deviceWidth = MediaQuery.of(context).size.width;
     _deviceHeight = MediaQuery.of(context).size.height;
-    return _buildUI();
+    return ChangeNotifierProvider(
+      create: (_context) => GamePageProvider(context: context),
+      child: _buildUI(),
+    );
   }
 
   Widget _buildUI() {
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: _deviceHeight! * 0.05,
+    return Builder(builder: (_context) {
+      _gamePageProvider = _context.watch<GamePageProvider>();
+      return Scaffold(
+        body: SafeArea(
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: _deviceHeight! * 0.05,
+            ),
+            child: _gameUI(),
           ),
-          child: _gameUI(),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _gameUI() {
