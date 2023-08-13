@@ -8,7 +8,8 @@ class GamePageProvider extends ChangeNotifier {
   final Dio _dio = Dio();
   final int _maxQuestions = 10;
 
-  List? _question;
+  List? questions; //get query api input
+  int _currentQuestionCount = 0;
 
   BuildContext context;
 
@@ -30,6 +31,11 @@ class GamePageProvider extends ChangeNotifier {
     var _data = jsonDecode(
       _response.toString(),
     );
-    _question = _data["results"];
+    questions = _data["results"];
+    notifyListeners();
+  }
+
+  String getCurrentQuestions() {
+    return questions![_currentQuestionCount]["question"];
   }
 }
