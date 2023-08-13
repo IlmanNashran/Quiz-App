@@ -43,7 +43,22 @@ class GamePageProvider extends ChangeNotifier {
     bool isCorrect =
         questions![_currentQuestionCount]["correct_answer"] == _answer;
     _currentQuestionCount++;
-    print(isCorrect ? "correct" : "inCorrect");
+    showDialog(
+      context: context,
+      builder: (BuildContext _context) {
+        return AlertDialog(
+          backgroundColor: isCorrect ? Colors.green : Colors.red,
+          title: Icon(
+            isCorrect ? Icons.check_circle : Icons.cancel_sharp,
+            color: Colors.white,
+          ),
+        );
+      },
+    );
+    await Future.delayed(
+      const Duration(seconds: 1),
+    );
+    Navigator.pop(context);
     notifyListeners();
   }
 }

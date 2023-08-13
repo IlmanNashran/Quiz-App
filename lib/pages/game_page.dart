@@ -63,7 +63,8 @@ class GamePage extends StatelessWidget {
 
   Widget _questionTest() {
     return Text(
-      _gamePageProvider!.getCurrentQuestions(),//get question from provider class
+      _gamePageProvider!
+          .getCurrentQuestions(), //get question from provider class
       style: const TextStyle(
           color: Colors.white, fontSize: 25, fontWeight: FontWeight.w400),
     );
@@ -71,7 +72,9 @@ class GamePage extends StatelessWidget {
 
   Widget _trueButton() {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        _gamePageProvider?.answerQuestion("True");
+      },
       color: Colors.green,
       minWidth: _deviceWidth! * 0.80,
       height: _deviceHeight! * 0.10,
@@ -87,7 +90,9 @@ class GamePage extends StatelessWidget {
 
   Widget _falseButton() {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        _gamePageProvider?.answerQuestion("False");
+      },
       color: Colors.red,
       minWidth: _deviceWidth! * 0.80,
       height: _deviceHeight! * 0.10,
