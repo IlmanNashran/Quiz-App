@@ -3,16 +3,20 @@ import 'package:provider/provider.dart';
 import 'package:quiz_app/pages/game_page_provider.dart';
 
 class GamePage extends StatelessWidget {
+  final String difficultyLevel;
   double? _deviceHeight, _deviceWidth;
 
   GamePageProvider? _gamePageProvider;
-
+  GamePage({required this.difficultyLevel});
   @override
   Widget build(BuildContext context) {
     _deviceWidth = MediaQuery.of(context).size.width;
     _deviceHeight = MediaQuery.of(context).size.height;
     return ChangeNotifierProvider(
-      create: (_context) => GamePageProvider(context: context),
+      create: (_context) => GamePageProvider(
+        context: context,
+        difficulityLevel: difficultyLevel,
+      ),
       child: _buildUI(),
     );
   }

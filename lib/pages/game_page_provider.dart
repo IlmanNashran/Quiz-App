@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 class GamePageProvider extends ChangeNotifier {
   final Dio _dio = Dio();
   final int _maxQuestions = 10;
+  final String difficulityLevel;
 
   List? questions; //get query api input
   int _currentQuestionCount = 0;
@@ -14,19 +15,20 @@ class GamePageProvider extends ChangeNotifier {
 
   BuildContext context;
 
-  GamePageProvider({required this.context}) {
+  GamePageProvider({required this.context, required this.difficulityLevel}) {
     _dio.options.baseUrl = "https://opentdb.com/api.php";
     _getQuestionsFromApi();
   }
 
   //function for get api data qeury
   Future<void> _getQuestionsFromApi() async {
+    print(difficulityLevel);
     var _response = await _dio.get(
       '',
       queryParameters: {
         'amount': 10,
         'type': 'boolean',
-        'difficulty': 'easy',
+        'difficulty': difficulityLevel,
       }, //get url attribute query
     );
     var _data = jsonDecode(
